@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D1705DA2992594F00138C57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1705D92992594F00138C57 /* AppDelegate.swift */; };
+		1D1705DC2992594F00138C57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1705DB2992594F00138C57 /* SceneDelegate.swift */; };
+		1D1705DE2992594F00138C57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1705DD2992594F00138C57 /* ViewController.swift */; };
+		1D1705E12992594F00138C57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1705DF2992594F00138C57 /* Main.storyboard */; };
+		1D1705E32992595100138C57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D1705E22992595100138C57 /* Assets.xcassets */; };
+		1D1705E62992595100138C57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1705E42992595100138C57 /* LaunchScreen.storyboard */; };
+		1D1705F529925A5F00138C57 /* CrescentSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D1705F429925A5F00138C57 /* CrescentSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1D1705F829925A5F00138C57 /* CrescentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1705F229925A5F00138C57 /* CrescentSDK.framework */; };
+		1D1705F929925A5F00138C57 /* CrescentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1705F229925A5F00138C57 /* CrescentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D9600FF29925B2B00076C23 /* CrescentSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9600FE29925B2B00076C23 /* CrescentSDK.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1D1705F629925A5F00138C57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D1705CE2992594F00138C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D1705F129925A5F00138C57;
+			remoteInfo = CrescentSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1D1705FD29925A5F00138C57 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1D1705F929925A5F00138C57 /* CrescentSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1D1705D62992594F00138C57 /* Crescent-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crescent-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D1705D92992594F00138C57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1D1705DB2992594F00138C57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1D1705DD2992594F00138C57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1D1705E02992594F00138C57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1D1705E22992595100138C57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1D1705E52992595100138C57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1D1705E72992595100138C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D1705F229925A5F00138C57 /* CrescentSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrescentSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D1705F429925A5F00138C57 /* CrescentSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrescentSDK.h; sourceTree = "<group>"; };
+		1D9600FE29925B2B00076C23 /* CrescentSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrescentSDK.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D1705D32992594F00138C57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D1705F829925A5F00138C57 /* CrescentSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D1705EF29925A5F00138C57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D1705CD2992594F00138C57 = {
+			isa = PBXGroup;
+			children = (
+				1D1705D82992594F00138C57 /* Crescent-iOS */,
+				1D1705F329925A5F00138C57 /* CrescentSDK */,
+				1D1705D72992594F00138C57 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1D1705D72992594F00138C57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D1705D62992594F00138C57 /* Crescent-iOS.app */,
+				1D1705F229925A5F00138C57 /* CrescentSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1D1705D82992594F00138C57 /* Crescent-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1D1705D92992594F00138C57 /* AppDelegate.swift */,
+				1D1705DB2992594F00138C57 /* SceneDelegate.swift */,
+				1D1705DD2992594F00138C57 /* ViewController.swift */,
+				1D1705DF2992594F00138C57 /* Main.storyboard */,
+				1D1705E22992595100138C57 /* Assets.xcassets */,
+				1D1705E42992595100138C57 /* LaunchScreen.storyboard */,
+				1D1705E72992595100138C57 /* Info.plist */,
+			);
+			path = "Crescent-iOS";
+			sourceTree = "<group>";
+		};
+		1D1705F329925A5F00138C57 /* CrescentSDK */ = {
+			isa = PBXGroup;
+			children = (
+				1D1705F429925A5F00138C57 /* CrescentSDK.h */,
+				1D9600FE29925B2B00076C23 /* CrescentSDK.swift */,
+			);
+			path = CrescentSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1D1705ED29925A5F00138C57 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D1705F529925A5F00138C57 /* CrescentSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1D1705D52992594F00138C57 /* Crescent-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D1705EA2992595100138C57 /* Build configuration list for PBXNativeTarget "Crescent-iOS" */;
+			buildPhases = (
+				1D1705D22992594F00138C57 /* Sources */,
+				1D1705D32992594F00138C57 /* Frameworks */,
+				1D1705D42992594F00138C57 /* Resources */,
+				1D1705FD29925A5F00138C57 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D1705F729925A5F00138C57 /* PBXTargetDependency */,
+			);
+			name = "Crescent-iOS";
+			productName = "Crescent-iOS";
+			productReference = 1D1705D62992594F00138C57 /* Crescent-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1D1705F129925A5F00138C57 /* CrescentSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D1705FA29925A5F00138C57 /* Build configuration list for PBXNativeTarget "CrescentSDK" */;
+			buildPhases = (
+				1D1705ED29925A5F00138C57 /* Headers */,
+				1D1705EE29925A5F00138C57 /* Sources */,
+				1D1705EF29925A5F00138C57 /* Frameworks */,
+				1D1705F029925A5F00138C57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrescentSDK;
+			productName = CrescentSDK;
+			productReference = 1D1705F229925A5F00138C57 /* CrescentSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1D1705CE2992594F00138C57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					1D1705D52992594F00138C57 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					1D1705F129925A5F00138C57 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+					};
+				};
+			};
+			buildConfigurationList = 1D1705D12992594F00138C57 /* Build configuration list for PBXProject "Crescent-iOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1D1705CD2992594F00138C57;
+			productRefGroup = 1D1705D72992594F00138C57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D1705D52992594F00138C57 /* Crescent-iOS */,
+				1D1705F129925A5F00138C57 /* CrescentSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D1705D42992594F00138C57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D1705E62992595100138C57 /* LaunchScreen.storyboard in Resources */,
+				1D1705E32992595100138C57 /* Assets.xcassets in Resources */,
+				1D1705E12992594F00138C57 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D1705F029925A5F00138C57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D1705D22992594F00138C57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D1705DE2992594F00138C57 /* ViewController.swift in Sources */,
+				1D1705DA2992594F00138C57 /* AppDelegate.swift in Sources */,
+				1D1705DC2992594F00138C57 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D1705EE29925A5F00138C57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D9600FF29925B2B00076C23 /* CrescentSDK.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1D1705F729925A5F00138C57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D1705F129925A5F00138C57 /* CrescentSDK */;
+			targetProxy = 1D1705F629925A5F00138C57 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1D1705DF2992594F00138C57 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D1705E02992594F00138C57 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1D1705E42992595100138C57 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D1705E52992595100138C57 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1D1705E82992595100138C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1D1705E92992595100138C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1D1705EB2992595100138C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8F838VHVDB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Crescent-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crescent.Crescent-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1D1705EC2992595100138C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8F838VHVDB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Crescent-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crescent.Crescent-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1D1705FB29925A5F00138C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8F838VHVDB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crescent.CrescentSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1D1705FC29925A5F00138C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8F838VHVDB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crescent.CrescentSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D1705D12992594F00138C57 /* Build configuration list for PBXProject "Crescent-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D1705E82992595100138C57 /* Debug */,
+				1D1705E92992595100138C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1D1705EA2992595100138C57 /* Build configuration list for PBXNativeTarget "Crescent-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D1705EB2992595100138C57 /* Debug */,
+				1D1705EC2992595100138C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1D1705FA29925A5F00138C57 /* Build configuration list for PBXNativeTarget "CrescentSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D1705FB29925A5F00138C57 /* Debug */,
+				1D1705FC29925A5F00138C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1D1705CE2992594F00138C57 /* Project object */;
+}
