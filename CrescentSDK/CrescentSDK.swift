@@ -5,7 +5,7 @@
 //  Created by cyh on 2023/2/7.
 //
 
-import Foundation
+import UIKit
 
 public class CrescentSDK {
     public static var mConfigure: CrescentConfigure? = nil;
@@ -24,6 +24,22 @@ public class CrescentSDK {
         mLoginDelegate = delegate;
         if (delegate != nil) {
             delegate!.onLoginFail();
+        }
+        
+        let nextVC = CrescentViewController()
+        nextVC.modalPresentationStyle = .overCurrentContext
+        nextVC.isModalInPresentation = true
+        let window: UIWindow!;
+        if #available(iOS 15.0, *) {
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            window = windowScene?.windows.first
+        } else {
+            window = UIApplication.shared.windows.first
+        }
+        
+        if let rootViewController =
+            window.rootViewController {
+            rootViewController.present(nextVC, animated: true, completion: nil)
         }
     }
     

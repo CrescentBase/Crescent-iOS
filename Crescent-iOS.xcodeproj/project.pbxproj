@@ -16,7 +16,14 @@
 		1D1705F529925A5F00138C57 /* CrescentSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D1705F429925A5F00138C57 /* CrescentSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D1705F829925A5F00138C57 /* CrescentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1705F229925A5F00138C57 /* CrescentSDK.framework */; };
 		1D1705F929925A5F00138C57 /* CrescentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1705F229925A5F00138C57 /* CrescentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D72B32C29B31A2B00EAE2CE /* MailViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D72B32B29B31A2B00EAE2CE /* MailViewControllerOld.swift */; };
+		1D72B32E29B31F3600EAE2CE /* EmailBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D72B32D29B31F3600EAE2CE /* EmailBean.swift */; };
 		1D9600FF29925B2B00076C23 /* CrescentSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9600FE29925B2B00076C23 /* CrescentSDK.swift */; };
+		1D960101299376A000076C23 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D960100299376A000076C23 /* LoginViewController.swift */; };
+		1D960103299376F500076C23 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1D960102299376F500076C23 /* assets */; };
+		1D9601052994EE1200076C23 /* CrescentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9601042994EE1200076C23 /* CrescentViewController.swift */; };
+		1D9601072994FF6200076C23 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9601062994FF6200076C23 /* CommonUtils.swift */; };
+		1D960109299643BC00076C23 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D960108299643BC00076C23 /* PopupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +61,14 @@
 		1D1705E72992595100138C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D1705F229925A5F00138C57 /* CrescentSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrescentSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D1705F429925A5F00138C57 /* CrescentSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrescentSDK.h; sourceTree = "<group>"; };
+		1D72B32B29B31A2B00EAE2CE /* MailViewControllerOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewControllerOld.swift; sourceTree = "<group>"; };
+		1D72B32D29B31F3600EAE2CE /* EmailBean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailBean.swift; sourceTree = "<group>"; };
 		1D9600FE29925B2B00076C23 /* CrescentSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrescentSDK.swift; sourceTree = "<group>"; };
+		1D960100299376A000076C23 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1D960102299376F500076C23 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		1D9601042994EE1200076C23 /* CrescentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrescentViewController.swift; sourceTree = "<group>"; };
+		1D9601062994FF6200076C23 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		1D960108299643BC00076C23 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +125,15 @@
 		1D1705F329925A5F00138C57 /* CrescentSDK */ = {
 			isa = PBXGroup;
 			children = (
+				1D960102299376F500076C23 /* assets */,
 				1D1705F429925A5F00138C57 /* CrescentSDK.h */,
 				1D9600FE29925B2B00076C23 /* CrescentSDK.swift */,
+				1D960100299376A000076C23 /* LoginViewController.swift */,
+				1D9601042994EE1200076C23 /* CrescentViewController.swift */,
+				1D9601062994FF6200076C23 /* CommonUtils.swift */,
+				1D960108299643BC00076C23 /* PopupViewController.swift */,
+				1D72B32B29B31A2B00EAE2CE /* MailViewControllerOld.swift */,
+				1D72B32D29B31F3600EAE2CE /* EmailBean.swift */,
 			);
 			path = CrescentSDK;
 			sourceTree = "<group>";
@@ -221,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D960103299376F500076C23 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +263,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D960109299643BC00076C23 /* PopupViewController.swift in Sources */,
+				1D72B32E29B31F3600EAE2CE /* EmailBean.swift in Sources */,
+				1D72B32C29B31A2B00EAE2CE /* MailViewControllerOld.swift in Sources */,
+				1D960101299376A000076C23 /* LoginViewController.swift in Sources */,
 				1D9600FF29925B2B00076C23 /* CrescentSDK.swift in Sources */,
+				1D9601072994FF6200076C23 /* CommonUtils.swift in Sources */,
+				1D9601052994EE1200076C23 /* CrescentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
