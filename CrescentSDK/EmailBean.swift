@@ -35,7 +35,7 @@ public class EmailBean {
             "sdk4337Fun();";
     
     public static let GMAIL_JS: String = "" +
-                "async function sdk4337Fun(isAndroid) {" +
+                "async function sdk4337Fun(isAndroid, receiverEmail, publicKey) {" +
                 "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
                 "if (window.hasSend4337 != true && (!document.getElementsByClassName('Gl d Pp Ze nm ol Sb  ') || document.getElementsByClassName('Gl d Pp Ze nm ol Sb  ').length <= 0)) {await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+2000)));}" +
                 "if (window.hasSend4337 != true && (!document.getElementsByClassName('Gl d Pp Ze nm ol Sb  ') || document.getElementsByClassName('Gl d Pp Ze nm ol Sb  ').length <= 0)) {await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+4000)));}" +
@@ -51,15 +51,15 @@ public class EmailBean {
                     "if (!document.getElementsByClassName('oj Vp hf')[0]) {await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+6000)));}" +
                     "document.getElementsByClassName('oj Vp hf')[0].click();" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+800)));" +
-                    "document.getElementsByClassName(\"Gl d Pp Ze nm ol Sb\")[0].click();" +
+                    "document.getElementsByClassName('Gl d Pp Ze nm ol Sb')[0].click();" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
-                    "document.querySelector(\".Mt .Ll.Ou\").value = \"cyh2023@163.com\";" +
+                    "document.querySelector('.Mt .Ll.Ou').value = receiverEmail;" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
-                    "document.querySelector(\".Bt.Ut .Ql\").value = \"test1 theme\";" +
+                    "document.querySelector('.Bt.Ut .Ql').value = 'Crescent';" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
-                    "document.querySelector(\".Vt .Nl\").innerHTML = \"test1 content…\" + new Date().getTime();" +
+                    "document.querySelector('.Vt .Nl').innerHTML = 'PK:' + publicKey;" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
-                    "document.querySelector(\".Gl.d.Pp.Ze.nm.ul.Mb\").click();" +
+                    "document.querySelector('.Gl.d.Pp.Ze.nm.ul.Mb').click();" +
                     "window.hasSend4337 = true; " +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*2000+300)));" +
                     "if (isAndroid) {prompt('js4337://4337sdk?arg1=gmail&arg2=end');} else {window.webkit.messageHandlers.CsCallBack.postMessage('gmail;end');}" +
@@ -69,9 +69,9 @@ public class EmailBean {
 
     public static let QQ_JS: String =
             "async function myFun() {" +
-                "if (document.querySelector(\"#composebtn\")) {" +
+                "if (document.querySelector('#composebtn')) {" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+600)));" +
-                    "location.href = document.querySelector(\"#composebtn\").href;" +
+                    "location.href = document.querySelector('#composebtn').href;" +
                 "}" +
             "};" +
             "myFun();";
@@ -90,7 +90,7 @@ public class EmailBean {
             "myFun();";
     
     public static let OUTLOOK_JS: String =
-            "async function sdk4337Fun(isAndroid) {" +
+            "async function sdk4337Fun(isAndroid, receiverEmail, publicKey) {" +
                 "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
                 "if (isAndroid) {prompt('js4337://4337sdk?arg1=outlook&arg2=begin');} else {window.webkit.messageHandlers.CsCallBack.postMessage('outlook;begin');}" +
                 "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+3000)));" +
@@ -106,10 +106,10 @@ public class EmailBean {
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+500)));" +
                     "document.getElementById('innerRibbonContainer').querySelectorAll('button')[1].click();" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+2000)));" +
-                    "document.querySelector('.EditorClass').innerHTML = '514124773@qq.com';" +
-                    "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+1300)));" +
-                    "document.querySelector('[id^=editorParent] div').innerHTML = 'from outlook test content' + new Date().getTime();" +
-                    "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+1300)));" +
+                    "document.querySelector('.EditorClass').innerHTML = receiverEmail;" +
+                    "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+800)));" +
+                    "document.querySelector('[id^=editorParent] div').innerHTML = 'PK:' + publicKey;" +
+                    "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+800)));" +
                     "document.getElementById('ReadingPaneContainerId').querySelectorAll('[role=\"button\"]')[1].click();" +
                     "await new Promise(r => setTimeout(r, Math.floor(Math.random()*500+1500)));" +
                     "document.querySelector('[id^=ok-]').click();" +

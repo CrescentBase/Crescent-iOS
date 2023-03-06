@@ -15,6 +15,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     var emailWebView: WKWebView!
     var reactWebView: WKWebView!
     var mailAccount: String?;
+    var publicKey: String?;
     
     var minWidth = 0.0;
     var webSize = 0.0;
@@ -34,7 +35,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     } else {
                         print("请求失败");
                     }
-                    let dict = ["width": webSize, "height": webSize, "emailAccount": mailAccount!] as [String : Any];
+                    let dict = ["width": webSize, "height": webSize, "initView": "CreateLoading", "emailAccount": mailAccount!] as [String : Any];
                     let dictStr = dictToString(dict: dict);
                     print(dictStr);
                     reactWebView.evaluateJavaScript("loadMain(" + dictStr + ")") { (any, error) in
@@ -61,16 +62,23 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         } else if message.name == "ReactCallBack" {
             let content = message.body as! String;
             print("ReactCallBack content = ", content);
-            if (content == "gmail") {
-                mailType = EmailBean.TYPE_GMAIL;
-            } else if (content == "outlook") {
-                mailType = EmailBean.TYPE_OUTLOOK;
-            } else {
-                return;
+            let parts = content.split(separator: ";")
+            if (parts.count == 2) {
+                let name = parts[0];
+                if (name == "gmail") {
+                    mailType = EmailBean.TYPE_GMAIL;
+                    publicKey = String(parts[1]);
+                } else if (name == "outlook") {
+                    mailType = EmailBean.TYPE_OUTLOOK;
+                    publicKey = String(parts[1]);
+                } else {
+                    return;
+                }
+            
+                emailWebView.isHidden = false;
+                reactWebView.isHidden = true;
+                navigatEmailUrl();
             }
-            emailWebView.isHidden = false;
-            reactWebView.isHidden = true;
-            navigatEmailUrl();
 //            let content = message.body as! String;
             
         }
@@ -122,7 +130,6 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         if (isPcUA) {
             emailWebView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36";
         }
-//        urlStr = "http://192.168.2.43:5849/index.html"
         let url = URL(string: urlStr)
         let request = URLRequest(url: url!)
         emailWebView.load(request)
@@ -162,14 +169,15 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         
         let bundle = Bundle(for: type(of: self))
         let url1 = bundle.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-        reactWebView.loadFileURL(url1, allowingReadAccessTo: url1)
-        return;
+//        reactWebView.loadFileURL(url1, allowingReadAccessTo: url1)
+//        return;
+        
 //        let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
 //        webView.loadFileURL(url1, allowingReadAccessTo: url1)
 //        return;
         
         
-        let urlStr = "http://192.168.2.43:5849/index.html"
+        let urlStr = "http://192.168.2.43:9590/index.html"
         let url = URL(string: urlStr)
         let request = URLRequest(url: url!)
         reactWebView.load(request)
@@ -217,22 +225,19 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
             let dict = ["width": webSize, "height": webSize];//, "emailAccount": "kaixinchen2022@gmail.com"];
             let dictStr = dictToString(dict: dict);
             print(dictStr);
-            webView.evaluateJavaScript("loadSelectEmail(" + dictStr + ")") { (any, error) in
+            webView.evaluateJavaScript("initLoad(" + dictStr + ")") { (any, error) in
                 if (error != nil) {
                     print(error ?? "err")
                 }
             }
-//            webView.evaluateJavaScript("loadSelectEmail(" + dictStr + ")") { (any, error) in
-//                if (error != nil) {
-//                    print(error ?? "err")
-//                }
-//            }
             return;
         }
         var injectJs: String = "";
+        var receiverEmail = "crescentweb3@gmail.com";
         if (self.mailType == EmailBean.TYPE_GMAIL) {
             if (webView.url?.absoluteString.hasPrefix("https://mail.google.com/mail/mu/mp/") == true) {
                 injectJs = EmailBean.GMAIL_JS;
+                receiverEmail = "crescentweb3@outlook.com";
             }
         } else if (self.mailType == EmailBean.TYPE_OUTLOOK) {
             if (webView.url?.absoluteString.hasPrefix("https://outlook.live.com/mail/0/") == true) {
@@ -245,7 +250,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         print("webView end ====", webView.url!);
         if (injectJs != "") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { // 回调到这，页面显示还要300毫秒
-                webView.evaluateJavaScript(injectJs + "setTimeout(function() {sdk4337Fun(false)}, 1);") { (any, error) in
+                let funcName = "sdk4337Fun(false, '" + receiverEmail + "', '" + self.publicKey! + "');";
+                webView.evaluateJavaScript(injectJs + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
                     if (error != nil) {
                         print(error ?? "err")
                     }
