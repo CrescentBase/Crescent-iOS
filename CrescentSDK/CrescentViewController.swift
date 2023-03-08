@@ -19,6 +19,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     
     var minWidth = 0.0;
     var webSize = 0.0;
+    var reactWebViewBottomConstraint: NSLayoutConstraint?
+    var emailWebViewBottomConstraint: NSLayoutConstraint?
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "CsCallBack" {
@@ -58,13 +60,18 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     reactWebView.isHidden = false;
                 }
             }
-//            self.webView.frame = CGRect(x: 33, y: 100, width: 0, height: 0)
         } else if message.name == "ReactCallBack" {
             let content = message.body as! String;
             print("ReactCallBack content = ", content);
             let parts = content.split(separator: ";")
             if (parts.count == 2) {
                 let name = parts[0];
+                if (name == "url") {
+                    if let url = URL(string: String(parts[1])) {
+                        UIApplication.shared.open(url)
+                    }
+                    return;
+                }
                 if (name == "gmail") {
                     mailType = EmailBean.TYPE_GMAIL;
                     publicKey = String(parts[1]);
@@ -79,8 +86,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 reactWebView.isHidden = true;
                 navigatEmailUrl();
             }
-//            let content = message.body as! String;
-            
+        
         }
     }
     
@@ -88,8 +94,6 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         let webConfiguration = WKWebViewConfiguration();
         emailWebView = WKWebView(frame: .zero, configuration: webConfiguration)
         emailWebView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-//        emailWebView.uiDelegate = self;
         emailWebView.layer.cornerRadius = 10
         emailWebView.layer.masksToBounds = true
         
@@ -98,9 +102,11 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         NSLayoutConstraint.activate([
             emailWebView.widthAnchor.constraint(equalToConstant: webSize),
             emailWebView.heightAnchor.constraint(equalToConstant: webSize),
-            emailWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             emailWebView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        
+        emailWebViewBottomConstraint = emailWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        emailWebViewBottomConstraint?.isActive = true
         
         let jsLog = "console.log = (" +
             "function(oriLogFunc){" +
@@ -140,19 +146,17 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         let webConfiguration = WKWebViewConfiguration();
         reactWebView = WKWebView(frame: .zero, configuration: webConfiguration)
         reactWebView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-//        emailWebView.uiDelegate = self;
         reactWebView.layer.cornerRadius = 10
         reactWebView.layer.masksToBounds = true
-        
         view.addSubview(reactWebView)
         
         NSLayoutConstraint.activate([
             reactWebView.widthAnchor.constraint(equalToConstant: webSize),
             reactWebView.heightAnchor.constraint(equalToConstant: webSize),
-            reactWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            reactWebView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reactWebView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        reactWebViewBottomConstraint = reactWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        reactWebViewBottomConstraint?.isActive = true
         
         let jsLog = "console.log = (" +
             "function(oriLogFunc){" +
@@ -177,7 +181,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
 //        return;
         
         
-        let urlStr = "http://192.168.2.43:9590/index.html"
+//        let urlStr = "http://192.168.2.43:613/index.html"
+        let urlStr = "https://www.baidu.com"
         let url = URL(string: urlStr)
         let request = URLRequest(url: url!)
         reactWebView.load(request)
@@ -214,10 +219,38 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         emailWebView.isHidden = true;
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let keyboardHeight = keyboardFrame.height
+        reactWebViewBottomConstraint?.constant = -keyboardHeight
+        emailWebViewBottomConstraint?.constant = -keyboardHeight
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc func keyboardWillHide(notification: Notification) {
+        reactWebViewBottomConstraint?.constant = 0
+        emailWebViewBottomConstraint?.constant = 0
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
-
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webView ====", webView.url!);
