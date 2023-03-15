@@ -8,18 +8,21 @@
 import UIKit
 import CrescentSDK
 
-class ViewController: UIViewController, LoginDelegate, SendTransactionDelegate {
-    func onLoginSuccess() {
-        
+class ViewController: UIViewController, ConnectDelegate, TransactionDelegate {
+    func onConnectSuccess(info: UserInfo) {
+        let email = info.email;
+        let address = info.address;
     }
     
-    func onLoginFail() {
+    func onSendSuccess(result: TransactionResult) {
+        let hash = result.hash;
+    }
+    
+    
+    func onConnectFail() {
         print("cyh::onLoginFail");
     }
     
-    func onSendSuccess() {
-        
-    }
     
     func onSendFail() {
         print("cyh::onSendFail");
@@ -95,23 +98,38 @@ class ViewController: UIViewController, LoginDelegate, SendTransactionDelegate {
     
     @objc
     func clickInitSdk() {
-        let config = CrescentConfigure(style: "")
+        var config = CrescentConfigure()
+        config.style = ""
         CrescentSDK.config(configure: config)
     }
     
     @objc
     func clickLogin() {
-        CrescentSDK.login(delegate: self)
+        CrescentSDK.connect(connectSuccessBlock: { userinfo in
+            let email = userinfo.email;
+            let address = userinfo.address;
+        }, connectFailBlock: {
+            print("fail")
+        })
     }
     
     @objc
     func clickLogout() {
-        CrescentSDK.logout()
+        CrescentSDK.disconnect()
     }
     
     @objc
     func clickSend() {
-        CrescentSDK.sendTransaction(info: nil, delegate: self)
+        var tx = TransactionInfo()
+        tx.from = ""
+        tx.to = ""
+        tx.value = ""
+        tx.data = "";
+        CrescentSDK.sendTransaction(info: tx, sendSuccessBlock: { transactionResult in
+            let hash = transactionResult.hash;
+        }, sendFailBlock: {
+            
+        })
     }
 }
 

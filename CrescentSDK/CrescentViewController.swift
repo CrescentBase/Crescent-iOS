@@ -16,6 +16,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     var reactWebView: WKWebView!
     var mailAccount: String?;
     var publicKey: String?;
+    var hasBegan: Bool = false;
     
     var minWidth = 0.0;
     var webSize = 0.0;
@@ -48,6 +49,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     emailWebView.isHidden = true;
                     reactWebView.isHidden = false;
                 } else if (mArray[1] == "begin") {
+                    hasBegan = true;
                     let dict = ["width": webSize, "height": webSize];
                     let dictStr = dictToString(dict: dict);
                     print(dictStr);
@@ -72,6 +74,13 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     }
                     return;
                 }
+                if (name == "error") {
+                    let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
+                    let dateFrom = NSDate(timeIntervalSince1970: 0)
+                    WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes as! Set<String>, modifiedSince: dateFrom as Date, completionHandler: {})
+                    self.toastFail()
+                    return;
+                }
                 if (name == "gmail") {
                     mailType = EmailBean.TYPE_GMAIL;
                     publicKey = String(parts[1]);
@@ -81,9 +90,14 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 } else {
                     return;
                 }
-            
-                emailWebView.isHidden = false;
-                reactWebView.isHidden = true;
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    if (!self.hasBegan) {
+                        self.emailWebView.isHidden = false;
+                        self.reactWebView.isHidden = true;
+                    }
+                }
+                
                 navigatEmailUrl();
             }
         
@@ -173,8 +187,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         
         let bundle = Bundle(for: type(of: self))
         let url1 = bundle.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-//        reactWebView.loadFileURL(url1, allowingReadAccessTo: url1)
-//        return;
+        reactWebView.loadFileURL(url1, allowingReadAccessTo: url1)
+        return;
         
 //        let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
 //        webView.loadFileURL(url1, allowingReadAccessTo: url1)
@@ -270,7 +284,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         if (self.mailType == EmailBean.TYPE_GMAIL) {
             if (webView.url?.absoluteString.hasPrefix("https://mail.google.com/mail/mu/mp/") == true) {
                 injectJs = EmailBean.GMAIL_JS;
-                receiverEmail = "crescentweb3@outlook.com";
+                receiverEmail = "crescentweb3@sohu.com";
             }
         } else if (self.mailType == EmailBean.TYPE_OUTLOOK) {
             if (webView.url?.absoluteString.hasPrefix("https://outlook.live.com/mail/0/") == true) {
@@ -316,6 +330,24 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         let range = NSRange(str.startIndex..., in: str)
         let isNumber = regex.firstMatch(in: str, options: [], range: range) != nil
         return isNumber;
+    }
+    
+    func toastFail() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 150, y: self.view.frame.size.height-100, width: 300, height: 35))
+        // 设置UILabel属性
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = "Failed to create wallet, please try again"
+
+        // 将UILabel添加到父视图上
+        self.view.addSubview(toastLabel)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            toastLabel.removeFromSuperview()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

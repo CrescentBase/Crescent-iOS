@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
   <title>Development</title>
 
+<!--  <script src="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" type="application/javascript"></script>-->
+
+<!--  <script src="./dist/umd/index.js"></script>-->
   <script src="./index.bundle.js"></script>
-<!--  <script src="./dist/umd/index.bundle.js"></script>-->
 
 </head>
-<body style="text-align: center; margin: 0px; background-color: transparent">
+<body style="text-align: center; margin: 0px; background-color: transparent; overflow: hidden;">
 
 <div id="parent-id" style="display: flex; position: relative">
   <div style="display: flex; position: absolute; justify-content: center" id="parent-div1"></div>
@@ -18,6 +21,16 @@
 </div>
 
 <script>
+  // localStorage.setItem('storage_wallet_keystore', '{"address":"8a73520b8052d7023d327cf6786533cd22fbcdd5","id":"c2e3af00-e9ee-4a15-8da4-4ead185e1212","version":3,"crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"cd9dcc4506caeb1f0a974eaf4f0bd68c"},"ciphertext":"ba2a2b05936b44eb1ab4c655926a1d65c6c912d762fa39215b3aa9104f5d7ba6","kdf":"scrypt","kdfparams":{"salt":"1f2cc358cce3139f0b8c2ab4289e996f08b3524354f48dd8161390b9161e8c45","n":256,"dklen":32,"p":1,"r":8},"mac":"b947b5662ac7001dc452d86b817534527b396fb880f98909abc5eee6ecc749d6"}}')
+  function initLoad(params) {
+    const keystoreKey = localStorage.getItem('storage_wallet_keystore');
+    console.log('===keystoreKey = ', keystoreKey);
+    if (keystoreKey) {
+      loadMain(params)
+    } else {
+      loadSelectEmail(params);
+    }
+  }
 
   function loadSelectEmail(params) {
     const element = document.getElementById('parent-div2');
@@ -92,49 +105,12 @@
     let destroy = CrescentSDK.CrescentEntry(allParams);
   }
 
+  // loadSelectEmail();
+ // initLoad({platform: 3});
+  // loadMain({initView: "SetPassword"});
+  // loadMain({initView: "Main"});
+  // loadMain({initView: "CreateLoading", emailAccount: 'test2023abc@outlook.com', platform: 3})
 
-
-
-
-  // var button = document.getElementById("btnPay");
-
-  function initParams (params){
-    // button.style.display= "none";
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-
-
-    function onComplete(obj) {
-      //     console.log(obj.receiver, obj.order_id, obj.tx_hash, obj.chain_id, obj.quantity, obj.blockchain);
-      destroy();
-      //     alert("payment success!!!");
-      //     button.style.display= "";
-    }
-    //
-    // const jsonObject = JSON.parse(params);
-    // const keyMap = Object.keys(jsonObject).reduce((map, key) => {
-    //   map[key] = jsonObject[key];
-    //   return map;
-    // }, {});
-    //
-    // prompt("js4337://4377sdk?arg1=gmail&arg2=" + params);
-    // prompt("js4337://4377sdk?arg1=gmail&arg2=" + jsonObject);
-    // prompt("js4337://4377sdk?arg1=gmail&arg2=" + keyMap);
-
-    let kk  = !!params ? params : {};
-    const aa = {
-      container: element,
-      width: 360,
-      height: 360,
-      style: '.MainSize {width: 350px; height: 350px} :root {--base-bg-color: #220000;  }',
-      language: 'zh',
-      onComplete,
-      ...kk
-    }
-
-    let destroy = CrescentSDK.EmailEntry(aa);
-  };
   // initParams();
   // button.addEventListener("click", func);
 </script>
