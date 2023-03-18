@@ -118,8 +118,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                                 // Access individual values in the dictionary
                                 let email = jsonDict["email"] as? String
                                 let address = jsonDict["address"] as? String
-                                UserDefaults.standard.set(email, forKey: CrescentSDK.SP_EMAIL_KEY)
-                                UserDefaults.standard.set(address, forKey: CrescentSDK.SP_ADDRESS_KEY)
+                                UserDefaults.standard.set(email, forKey: EmailBean.SP_EMAIL_KEY)
+                                UserDefaults.standard.set(address, forKey: EmailBean.SP_ADDRESS_KEY)
                                 let mConnectSuccessBlock = CrescentSDK.mConnectSuccessBlock;
                                 if let successBlock = mConnectSuccessBlock {
                                     var userInfo = UserInfo()

@@ -12,9 +12,6 @@ import NetworkExtension
 import SystemConfiguration.CaptiveNetwork
 
 public class CrescentSDK {
-    public static var SP_EMAIL_KEY = "CRESCENT_SS_EMAIL_KEY";
-    public static var SP_ADDRESS_KEY = "CRESCENT_SS_ADDRESS_KEY";
-    
     public static var mConfigure: CrescentConfigure? = nil;
     
     public static var  mConnectSuccessBlock: ((UserInfo) -> Void)?
@@ -27,7 +24,7 @@ public class CrescentSDK {
     }
     
     public static func isConnected() -> Bool {
-        if ((UserDefaults.standard.string(forKey: CrescentSDK.SP_ADDRESS_KEY) != nil) && (UserDefaults.standard.string(forKey: CrescentSDK.SP_EMAIL_KEY) != nil)) {
+        if ((UserDefaults.standard.string(forKey: EmailBean.SP_ADDRESS_KEY) != nil) && (UserDefaults.standard.string(forKey: EmailBean.SP_EMAIL_KEY) != nil)) {
             return true;
         }
         return false;
@@ -87,8 +84,8 @@ public class CrescentSDK {
     }
     
     public static func disconnect() -> Void {
-        UserDefaults.standard.removeObject(forKey: CrescentSDK.SP_EMAIL_KEY)
-        UserDefaults.standard.removeObject(forKey: CrescentSDK.SP_ADDRESS_KEY)
+        UserDefaults.standard.removeObject(forKey: EmailBean.SP_EMAIL_KEY)
+        UserDefaults.standard.removeObject(forKey: EmailBean.SP_ADDRESS_KEY)
 //
         let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
         let dateFrom = NSDate(timeIntervalSince1970: 0)

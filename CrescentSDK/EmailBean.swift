@@ -8,6 +8,9 @@
 import Foundation
 
 public class EmailBean {
+    public static var SP_EMAIL_KEY = "CRESCENT_SS_EMAIL_KEY";
+    public static var SP_ADDRESS_KEY = "CRESCENT_SS_ADDRESS_KEY";
+    
     public static let TYPE_TEST: Int = 0x10000;
     public static let TYPE_GMAIL: Int = 0x1;
     public static let TYPE_OUTLOOK: Int = 0x2;
