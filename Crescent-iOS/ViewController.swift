@@ -8,30 +8,11 @@
 import UIKit
 import CrescentSDK
 
-class ViewController: UIViewController, ConnectDelegate, TransactionDelegate {
-    func onConnectSuccess(info: UserInfo) {
-        let email = info.email;
-        let address = info.address;
-    }
-    
-    func onSendSuccess(result: TransactionResult) {
-        let hash = result.hash;
-    }
-    
-    
-    func onConnectFail() {
-        print("cyh::onLoginFail");
-    }
-    
-    
-    func onSendFail() {
-        print("cyh::onSendFail");
-    }
-    
-
+class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.systemBlue
         setupViews();
     }
     
@@ -64,18 +45,6 @@ class ViewController: UIViewController, ConnectDelegate, TransactionDelegate {
             sendButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 400),
         ])
     }
-
-//    private lazy var loginButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Login", for: .normal)
-//        button.backgroundColor = .black.withAlphaComponent(0.1)
-//        button.setTitleColor(UIColor.black, for: .normal)
-//        button.layer.cornerRadius = 8
-//        button.translatesAutoresizingMaskIntoConstraints = false
-////        button.frame = CGRect(x: 100, y: 100, width: 292, height: 50)
-//        button.addTarget(self, action: #selector(clickLogin), for: .touchUpInside)
-//        return button
-//    }()
     
     private lazy var initButton: UIButton = getButton(name: "InitSdk", act: #selector(clickInitSdk))
     
@@ -100,14 +69,15 @@ class ViewController: UIViewController, ConnectDelegate, TransactionDelegate {
     func clickInitSdk() {
         var config = CrescentConfigure()
         config.style = ""
+        config.paymasterUrl = "https://wallet.crescentbase.com/api/v1/signOp"
         CrescentSDK.config(configure: config)
     }
     
     @objc
     func clickLogin() {
         CrescentSDK.connect(connectSuccessBlock: { userinfo in
-            let email = userinfo.email;
-            let address = userinfo.address;
+            let email = userinfo.email!;
+            let address = userinfo.address!;
         }, connectFailBlock: {
             print("fail")
         })
@@ -121,12 +91,12 @@ class ViewController: UIViewController, ConnectDelegate, TransactionDelegate {
     @objc
     func clickSend() {
         var tx = TransactionInfo()
-        tx.from = ""
-        tx.to = ""
-        tx.value = ""
-        tx.data = "";
+        tx.chainId = "137"
+        tx.to = "0x6De6b8B22241A753495ed1C3289aBc9Bf61F5D2e"
+        tx.value = "0x2386f26fc10000"
+//        tx.data = "0xa9059cbb0000000000000000000000000648cea573a37ad78738c9ed861dd8ad9ca53bec0000000000000000000000000000000000000000000000000000000000002710"
         CrescentSDK.sendTransaction(info: tx, sendSuccessBlock: { transactionResult in
-            let hash = transactionResult.hash;
+            let hash = transactionResult.hash!;
         }, sendFailBlock: {
             
         })
