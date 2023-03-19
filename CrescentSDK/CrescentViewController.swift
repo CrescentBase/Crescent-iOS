@@ -17,7 +17,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     var mailAccount: String?;
     var publicKey: String?;
     var walletKeytore: String?;
-    var hasBegan: Bool = false;
+    var hasGetAccount: Bool = false;
+    var hasInject: Bool = false;
     
     var minWidth = 0.0;
     var webSize = 0.0;
@@ -34,6 +35,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
             let mArray = content.components(separatedBy: ";")
             if (mArray.count >= 2) {
                 if (mArray[1] == "account") {
+                    hasGetAccount = true;
                     mailAccount = mArray[2];
                     let dict = ["width": webSize, "height": webSize, "initView": "CreateLoading", "emailAccount": mailAccount!, "paymasterUrl": CrescentSDK.mConfigure?.paymasterUrl!] as [String : Any];
                     let dictStr = dictToString(dict: dict);
@@ -135,9 +137,15 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     return;
                 }
                 if (name == "gmail") {
+                    if (publicKey != nil) {
+                        return;
+                    }
                     mailType = EmailBean.TYPE_GMAIL;
                     publicKey = String(parts[1]);
                 } else if (name == "outlook") {
+                    if (publicKey != nil) {
+                        return;
+                    }
                     mailType = EmailBean.TYPE_OUTLOOK;
                     publicKey = String(parts[1]);
                 } else {
@@ -145,7 +153,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    if (!self.hasBegan) {
+                    if (!self.hasInject) {
                         self.emailWebView.isHidden = false;
                         self.reactWebView.isHidden = true;
                     }
@@ -323,7 +331,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if (!hasBegan || walletKeytore != nil) {
+        if (!hasGetAccount || walletKeytore != nil) {
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -384,8 +392,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         }  else if (self.mailType == EmailBean.TYPE_OUTLOOK) {
             injectJs = EmailBean.TEST_JS
         }
-        if (injectJs != "") {
-            hasBegan = true;
+        if (injectJs != "" && !hasInject) {
+            hasInject = true;
             let dict = ["width": webSize, "height": webSize, "pagmasterUrl": CrescentSDK.mConfigure?.paymasterUrl!] as [String : Any];
             let dictStr = dictToString(dict: dict);
             reactWebView.evaluateJavaScript("loadLoading(" + dictStr + ")") { (any, error) in
