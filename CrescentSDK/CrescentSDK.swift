@@ -30,30 +30,7 @@ public class CrescentSDK {
         }
         return false;
     }
-    //
-    //    public static func connect(delegate: ConnectDelegate?) -> Void {
-    //        mLoginDelegate = delegate;
-    //        if (delegate != nil) {
-    //            delegate!.onConnectFail();
-    //        }
-    //
-    //        let nextVC = CrescentViewController()
-    //        nextVC.modalPresentationStyle = .overCurrentContext
-    //        nextVC.isModalInPresentation = true
-    //        let window: UIWindow!;
-    //        if #available(iOS 15.0, *) {
-    //            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-    //            window = windowScene?.windows.first
-    //        } else {
-    //            window = UIApplication.shared.windows.first
-    //        }
-    //
-    //        if let rootViewController =
-    //            window.rootViewController {
-    //            rootViewController.present(nextVC, animated: true, completion: nil)
-    //        }
-    //    }
-    //
+    
     public static func connect(connectSuccessBlock: @escaping (UserInfo) -> Void, connectFailBlock: @escaping () -> Void) {
         if (mConfigure == nil || mConfigure?.paymasterUrl == nil) {
             return;
@@ -75,13 +52,6 @@ public class CrescentSDK {
             window.rootViewController {
             rootViewController.present(nextVC, animated: true, completion: nil)
         }
-        
-//        if let successBlock = mConnectSuccessBlock {
-//            var userInfo = UserInfo()
-//            userInfo.email = "example@email.com"
-//            userInfo.address = "123 Main St"
-//            successBlock(userInfo)
-//        }
     }
     
     public static func disconnect() -> Void {
@@ -150,7 +120,7 @@ public class CrescentSDK {
             try? FileManager.default.removeItem(atPath: cookiesFolderPath)
         }
 
-//
+
         let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
         let dateFrom = NSDate(timeIntervalSince1970: 0)
         WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes as! Set<String>, modifiedSince: dateFrom as Date, completionHandler: {})
@@ -180,20 +150,11 @@ public class CrescentSDK {
         }
     }
     
-//    public static func sendTransaction(info: TransactionInfo?, delegate: TransactionDelegate?) -> Void {
-//        mTransactionDelegate = delegate;
-//        if (delegate != nil) {
-//            delegate!.onSendFail();
-//        }
-//    }
-    
     static func checkNetworkPermission() {
         if hasWiFiPermission() || hasCellularPermission() {
-            print("====有权限")
             // 权限已经被授予
             // 在这里添加你的代码
         } else {
-            print("====没有权限")
             requestNetworkPermission()
             
         }
@@ -221,52 +182,14 @@ public class CrescentSDK {
     static func requestNetworkPermission() {
         if let url = URL(string: "https://www.baidu.com") {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
-//                if let data = data {
-//                    if let htmlContent = String(data: data, encoding: .utf8) {
-//                        print(htmlContent)
-//                    }
-//                }
             }
             task.resume()
         }
         return;
-//
-//        if #available(iOS 13.0, *) {
-//            let configuration = NEHotspotConfiguration(ssid: "")
-//            configuration.joinOnce = true
-//            NEHotspotConfigurationManager.shared.apply(configuration) { (error) in
-//                if error != nil {
-//                    // 请求权限失败
-//                } else {
-//                    // 请求权限成功
-//                    // 在这里添加你的代码
-//                }
-//            }
-//        } else {
-//            let cellData = CTCellularData()
-//            cellData.cellularDataRestrictionDidUpdateNotifier = { (state) in
-//                if state == .restrictedStateUnknown || state == .notRestricted {
-//                    cellData.cellularDataRestrictionDidUpdateNotifier = nil
-//                    // 请求权限成功
-//                    // 在这里添加你的代码
-//                }
-//            }
-//            cellData.cellularDataRestrictionDidUpdateNotifier = nil
-//        }
     }
 
 
 }
-
-//public protocol ConnectDelegate {
-//    func onConnectSuccess(info: UserInfo);
-//    func onConnectFail();
-//}
-//
-//public protocol TransactionDelegate {
-//    func onSendSuccess(result: TransactionResult);
-//    func onSendFail();
-//}
 
 public struct TransactionInfo {
     public init() {

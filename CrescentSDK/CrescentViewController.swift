@@ -48,22 +48,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     emailWebView.isHidden = true;
                     reactWebView.isHidden = false;
                 } else if (mArray[1] == "end") {
-//                    if (mailAccount != nil) {
-//                        print("请求成功： ", mailAccount!);
-//                    } else {
-//                        print("请求失败");
-//                    }
                 } else if (mArray[1] == "begin") {
-//                    hasBegan = true;
-//                    let dict = ["width": webSize, "height": webSize, "pagmasterUrl": CrescentSDK.mConfigure?.paymasterUrl!] as [String : Any];
-//                    let dictStr = dictToString(dict: dict);
-//                    reactWebView.evaluateJavaScript("loadLoading(" + dictStr + ")") { (any, error) in
-//                        if (error != nil) {
-//                            print(error ?? "err")
-//                        }
-//                    }
-//                    emailWebView.isHidden = true;
-//                    reactWebView.isHidden = false;
                 }
             }
         } else if message.name == "ReactCallBack" {
@@ -210,13 +195,6 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         }
         if (isPcUA) {
             emailWebView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36";
-            
-//            let useragentPre = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.";
-//            let currentTimeMillis = Int64(Date().timeIntervalSince1970 * 1000)
-//            let lastFiveDigits = Int(currentTimeMillis % 100000)
-//            let useragent = useragentPre + String(lastFiveDigits);
-//            print(“==useragent”);
-//            emailWebView.customUserAgent = useragent;
         }
         let url = URL(string: urlStr)
         let request = URLRequest(url: url!)
@@ -254,8 +232,11 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         reactWebView.navigationDelegate = self;
         
         let bundle = Bundle(for: type(of: self))
-        let url1 = bundle.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-        reactWebView.loadFileURL(url1, allowingReadAccessTo: url1)
+        var url1 = bundle.url(forResource: "index", withExtension: "html", subdirectory: "assets")
+        if url1 == nil {
+            url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")
+        }
+        reactWebView.loadFileURL(url1!, allowingReadAccessTo: url1!)
         return;
 //
 //        let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
@@ -264,7 +245,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         
         
 //        let urlStr = "http://192.168.2.43:4143/index.html"
-////        let urlStr = "https://www.baidu.com"
+//        let urlStr = "https://www.baidu.com"
 //        let url = URL(string: urlStr)
 //        let request = URLRequest(url: url!)
 //        reactWebView.load(request)
