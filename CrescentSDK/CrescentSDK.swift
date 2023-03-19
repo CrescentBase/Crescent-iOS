@@ -10,6 +10,7 @@ import WebKit
 import CoreTelephony
 import NetworkExtension
 import SystemConfiguration.CaptiveNetwork
+//import Security
 
 public class CrescentSDK {
     public static var mConfigure: CrescentConfigure? = nil;
@@ -86,6 +87,69 @@ public class CrescentSDK {
     public static func disconnect() -> Void {
         UserDefaults.standard.removeObject(forKey: EmailBean.SP_EMAIL_KEY)
         UserDefaults.standard.removeObject(forKey: EmailBean.SP_ADDRESS_KEY)
+        return;
+//        
+//
+//        let outlookService = "outlook.live.com"
+//        let outlookAccount = "test2023abc@outlook.com"
+//
+//        let query: [String: Any] = [
+//            kSecClass as String: kSecClassInternetPassword,
+//            kSecAttrServer as String: outlookService,
+//            kSecAttrAccount as String: outlookAccount,
+//            kSecReturnAttributes as String: true,
+//            kSecReturnData as String: false
+//        ]
+//
+//        var item: CFTypeRef?
+//        let status = SecItemCopyMatching(query as CFDictionary, &item)
+//
+//        if status == errSecSuccess {
+//            let attributes = item as! [String: Any]
+//            let itemToDelete: [String: Any] = [
+//                kSecClass as String: kSecClassInternetPassword,
+//                kSecAttrServer as String: outlookService,
+//                kSecAttrAccount as String: outlookAccount,
+//                kSecAttrProtocol as String: kSecAttrProtocolHTTPS,
+//                kSecAttrAuthenticationType as String: kSecAttrAuthenticationTypeDefault,
+//                kSecUseDataProtectionKeychain as String: true,
+//                kSecAttrSynchronizable as String: false
+//            ]
+//            let deleteStatus = SecItemDelete(itemToDelete as CFDictionary)
+//            if deleteStatus == errSecSuccess {
+//                print("Outlook account credentials have been deleted from Keychain.")
+//            } else {
+//                print("Error deleting Outlook account credentials from Keychain: \(deleteStatus)")
+//            }
+//        } else {
+//            print("Outlook account credentials not found in Keychain.")
+//        }
+//
+//
+//        let storage = HTTPCookieStorage.shared
+//        for cookie in storage.cookies ?? [] {
+//            storage.deleteCookie(cookie)
+//        }
+//
+//        let cache = URLCache.shared
+//        cache.removeAllCachedResponses()
+//        cache.diskCapacity = 0
+
+
+        
+        if #available(iOS 11.0, *) {
+            let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
+            let date = Date(timeIntervalSince1970: 0)
+            WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes as! Set<String>, modifiedSince: date, completionHandler:{ })
+            
+            URLCache.shared.removeAllCachedResponses()
+
+        } else {
+            let libraryPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let cookiesFolderPath = libraryPath + "/Cookies"
+            try? FileManager.default.removeItem(atPath: cookiesFolderPath)
+        }
+
 //
         let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
         let dateFrom = NSDate(timeIntervalSince1970: 0)
