@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
+  <title>Development</title>
+  <script src="./index.bundle.js"></script>
+
+</head>
+<body style="text-align: center; margin: 0px; background-color: transparent; overflow: hidden;">
+
+<div id="parent-id" style="display: flex; position: relative">
+  <div style="display: flex; position: absolute; justify-content: center" id="parent-div1"></div>
+  <div style="display: flex; position: absolute; justify-content: center" id="parent-div2"></div>
+<!--  <button id="btnPay" type="button" style="display: none">Buy</button>-->
+</div>
+
+<script>
+   function initLoad(params) {
+    const keystoreKey = localStorage.getItem('storage_wallet_keystore');
+    if (keystoreKey) {
+      loadMain(params)
+    } else {
+      loadSelectEmail(params);
+    }
+  }
+
+  function loadSelectEmail(params) {
+    const element = document.getElementById('parent-div2');
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    function onComplete(obj) {
+      destroy();
+    }
+
+    let paramMap  = !!params ? params : {};
+    const allParams = {
+      container: element,
+      width: 360,
+      height: 360,
+      language: 'zh',
+      onComplete,
+      ...paramMap
+    }
+    let destroy = CrescentSDK.EmailEntry(allParams);
+  }
+
+  function loadLoading(params) {
+    const element = document.getElementById('parent-div2');
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    function onComplete(obj) {
+      destroy();
+    }
+
+    let paramMap  = !!params ? params : {};
+    const allParams = {
+      container: element,
+      width: 360,
+      height: 360,
+      language: 'zh',
+      onComplete,
+      ...paramMap
+    }
+    let destroy = CrescentSDK.LoadingEntry(allParams);
+  }
+
+  function loadMain(params) {
+    const element = document.getElementById('parent-div1');
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+
+    function removeLoading() {
+      const element2 = document.getElementById('parent-div2');
+      while (element2.firstChild) {
+        element2.removeChild(element2.firstChild);
+      }
+    }
+
+    function onComplete(obj) {
+      destroy();
+    }
+
+    let paramMap  = !!params ? params : {};
+    const allParams = {
+      container: element,
+      width: 360,
+      height: 360,
+      language: 'zh',
+      onComplete,
+      removeLoading,
+      ...paramMap
+    }
+    let destroy = CrescentSDK.CrescentEntry(allParams);
+  }
+</script>
+
+</body>
+</html>
+

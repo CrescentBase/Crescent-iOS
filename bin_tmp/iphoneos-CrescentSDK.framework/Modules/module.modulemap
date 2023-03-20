@@ -1,0 +1,11 @@
+framework module CrescentSDK {
+  umbrella header "CrescentSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module CrescentSDK.Swift {
+  header "CrescentSDK-Swift.h"
+  requires objc
+}
