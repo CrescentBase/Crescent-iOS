@@ -19,6 +19,8 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     var walletKeytore: String?;
     var hasGetAccount: Bool = false;
     var hasInject: Bool = false;
+    var mHasPreInject: Bool = false;
+    var mHasPreInject2: Bool = false;
     
     var minWidth = 0.0;
     var webSize = 0.0;
@@ -133,6 +135,24 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                     }
                     mailType = EmailBean.TYPE_OUTLOOK;
                     publicKey = String(parts[1]);
+                } else if (name == "mail163") {
+                    if (publicKey != nil) {
+                        return;
+                    }
+                    mailType = EmailBean.TYPE_163;
+                    publicKey = String(parts[1]);
+                } else if (name == "yahoo") {
+                    if (publicKey != nil) {
+                        return;
+                    }
+                    mailType = EmailBean.TYPE_YAHOO;
+                    publicKey = String(parts[1]);
+                } else if (name == "aol") {
+                    if (publicKey != nil) {
+                        return;
+                    }
+                    mailType = EmailBean.TYPE_AOL;
+                    publicKey = String(parts[1]);
                 } else {
                     return;
                 }
@@ -192,6 +212,12 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         } else if (mailType == EmailBean.TYPE_QQ) {
             urlStr = EmailBean.QQ_URL;
             isPcUA = true;
+        } else if (mailType == EmailBean.TYPE_163) {
+            urlStr = EmailBean.MAIL163_URL;
+        } else if (mailType == EmailBean.TYPE_YAHOO) {
+            urlStr = EmailBean.YAHOO_URL;
+        } else if (mailType == EmailBean.TYPE_AOL) {
+            urlStr = EmailBean.AOL_URL;
         }
         if (isPcUA) {
             emailWebView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36";
@@ -372,6 +398,68 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
             }
         }  else if (self.mailType == EmailBean.TYPE_OUTLOOK) {
             injectJs = EmailBean.TEST_JS
+        } else if (self.mailType == EmailBean.TYPE_163) {
+            if (webView.url?.absoluteString.hasPrefix("https://mail.163.com/m/main.jsp") == true) {
+                injectJs = EmailBean.MAIL163_JS;
+            } else if (!mHasPreInject && webView.url?.absoluteString.hasPrefix("https://smart.mail.163.com/login.htm") == true) {
+                mHasPreInject = true;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    let funcName = "hideTopInstall();";
+                    webView.evaluateJavaScript(EmailBean.MAIL163_HIDE_JS + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
+                        if (error != nil) {
+                            print(error ?? "err")
+                        }
+                    }
+                }
+            }
+        } else if (self.mailType == EmailBean.TYPE_YAHOO) {
+            if (webView.url?.absoluteString.hasPrefix("https://mail.yahoo.com/mb/compose") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.yahoo.com/mb/compose") == true) {
+                injectJs = EmailBean.YAHOO_JS;
+            } else if (!mHasPreInject && (webView.url?.absoluteString.hasPrefix("https://mail.yahoo.com/mb/listfolders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.yahoo.com/mb/listfolders/") == true)) {
+                mHasPreInject = true;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    let funcName = "sdk4337GetAccount(false);";
+                    webView.evaluateJavaScript(EmailBean.YAHOO_JS_GETACCOUNT + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
+                        if (error != nil) {
+                            print(error ?? "err")
+                        }
+                    }
+                }
+            } else if (!mHasPreInject2 && (webView.url?.absoluteString.hasPrefix("https://mail.yahoo.com/mb/folders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.yahoo.com/mb/folders/") == true)) {
+                mHasPreInject2 = true;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    let funcName = "sdk4337ClickCompose();";
+                    webView.evaluateJavaScript(EmailBean.YAHOO_JS_CLICKCOMPOSE + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
+                        if (error != nil) {
+                            print(error ?? "err")
+                        }
+                    }
+                }
+            }
+        } else if (self.mailType == EmailBean.TYPE_AOL) {
+            if (webView.url?.absoluteString.hasPrefix("https://mail.aol.com/mb/compose") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.aol.com/mb/compose") == true) {
+                injectJs = EmailBean.AOL_JS;
+            } else if (!mHasPreInject && (webView.url?.absoluteString.hasPrefix("https://mail.aol.com/mb/listfolders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.aol.com/mb/listfolders/") == true)) {
+                mHasPreInject = true;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    let funcName = "sdk4337GetAccount(false);";
+                    webView.evaluateJavaScript(EmailBean.AOL_JS_GETACCOUNT + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
+                        if (error != nil) {
+                            print(error ?? "err")
+                        }
+                    }
+                }
+            } else if (!mHasPreInject2 && (webView.url?.absoluteString.hasPrefix("https://mail.aol.com/mb/folders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.aol.com/mb/folders/") == true)) {
+                mHasPreInject2 = true;
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    let funcName = "sdk4337ClickCompose();";
+                    webView.evaluateJavaScript(EmailBean.AOL_JS_CLICKCOMPOSE + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
+                        if (error != nil) {
+                            print(error ?? "err")
+                        }
+                    }
+                }
+            }
         }
         if (injectJs != "" && !hasInject) {
             hasInject = true;
