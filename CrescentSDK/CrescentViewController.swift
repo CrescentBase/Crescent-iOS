@@ -21,6 +21,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
     var hasInject: Bool = false;
     var mHasPreInject: Bool = false;
     var mHasPreInject2: Bool = false;
+    var mHasShowLoading: Bool = false;
     
     var minWidth = 0.0;
     var webSize = 0.0;
@@ -158,7 +159,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    if (!self.hasInject) {
+                    if (!self.hasInject && !self.mHasShowLoading) {
                         self.emailWebView.isHidden = false;
                         self.reactWebView.isHidden = true;
                     }
@@ -264,14 +265,9 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         }
         reactWebView.loadFileURL(url1!, allowingReadAccessTo: url1!)
         return;
-//
-//        let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-//        webView.loadFileURL(url1, allowingReadAccessTo: url1)
-//        return;
         
         
-//        let urlStr = "http://192.168.2.43:4143/index.html"
-//        let urlStr = "https://www.baidu.com"
+//        let urlStr = "http://192.168.2.43:5918/index.html"
 //        let url = URL(string: urlStr)
 //        let request = URLRequest(url: url!)
 //        reactWebView.load(request)
@@ -341,6 +337,22 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         if (!hasGetAccount || walletKeytore != nil) {
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func showLoading() {
+        if (mHasShowLoading) {
+            return;
+        }
+        mHasShowLoading = true;
+        let dict = ["width": webSize, "height": webSize, "pagmasterUrl": CrescentSDK.mConfigure?.paymasterUrl!] as [String : Any];
+        let dictStr = dictToString(dict: dict);
+        reactWebView.evaluateJavaScript("loadLoading(" + dictStr + ")") { (any, error) in
+            if (error != nil) {
+                print(error ?? "err")
+            }
+        }
+        emailWebView.isHidden = true;
+        reactWebView.isHidden = false;
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -417,6 +429,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 injectJs = EmailBean.YAHOO_JS;
             } else if (!mHasPreInject && (webView.url?.absoluteString.hasPrefix("https://mail.yahoo.com/mb/listfolders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.yahoo.com/mb/listfolders/") == true)) {
                 mHasPreInject = true;
+                showLoading();
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     let funcName = "sdk4337GetAccount(false);";
                     webView.evaluateJavaScript(EmailBean.YAHOO_JS_GETACCOUNT + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
@@ -427,6 +440,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 }
             } else if (!mHasPreInject2 && (webView.url?.absoluteString.hasPrefix("https://mail.yahoo.com/mb/folders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.yahoo.com/mb/folders/") == true)) {
                 mHasPreInject2 = true;
+                showLoading();
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     let funcName = "sdk4337ClickCompose();";
                     webView.evaluateJavaScript(EmailBean.YAHOO_JS_CLICKCOMPOSE + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
@@ -441,6 +455,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 injectJs = EmailBean.AOL_JS;
             } else if (!mHasPreInject && (webView.url?.absoluteString.hasPrefix("https://mail.aol.com/mb/listfolders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.aol.com/mb/listfolders/") == true)) {
                 mHasPreInject = true;
+                showLoading();
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     let funcName = "sdk4337GetAccount(false);";
                     webView.evaluateJavaScript(EmailBean.AOL_JS_GETACCOUNT + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
@@ -451,6 +466,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
                 }
             } else if (!mHasPreInject2 && (webView.url?.absoluteString.hasPrefix("https://mail.aol.com/mb/folders/") == true || webView.url?.absoluteString.hasPrefix("https://canary-mg.mail.aol.com/mb/folders/") == true)) {
                 mHasPreInject2 = true;
+                showLoading();
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     let funcName = "sdk4337ClickCompose();";
                     webView.evaluateJavaScript(EmailBean.AOL_JS_CLICKCOMPOSE + "setTimeout(function() {" + funcName + "}, 1);") { (any, error) in
@@ -463,15 +479,7 @@ class CrescentViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         }
         if (injectJs != "" && !hasInject) {
             hasInject = true;
-            let dict = ["width": webSize, "height": webSize, "pagmasterUrl": CrescentSDK.mConfigure?.paymasterUrl!] as [String : Any];
-            let dictStr = dictToString(dict: dict);
-            reactWebView.evaluateJavaScript("loadLoading(" + dictStr + ")") { (any, error) in
-                if (error != nil) {
-                    print(error ?? "err")
-                }
-            }
-            emailWebView.isHidden = true;
-            reactWebView.isHidden = false;
+            showLoading();
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { // 回调到这，页面显示还要300毫秒
                 let funcName = "sdk4337Fun(false, '" + receiverEmail + "', '" + self.publicKey! + "');";
