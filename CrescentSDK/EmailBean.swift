@@ -172,16 +172,6 @@ public class EmailBean {
                "    }\n" +
                "    if (window.hasSend4337 != true) {\n" +
                "      var indexId = isAndroid ? 3 : 2;\n" +
-               "      while (!document.querySelector('.frame-minaAccount')) {\n" +
-               "        await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
-               "      }\n" +
-               "      await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
-               "      let account = document.querySelector('.frame-minaAccount').innerHTML;\n" +
-               "      if (isAndroid) {\n" +
-               "        prompt('js4337://4337sdk?arg1=mail163&arg2=account&arg3=' + account.replace(/\\s+/g, ''));\n" +
-               "      } else {\n" +
-               "        window.webkit.messageHandlers.CsCallBack.postMessage('mail163;account;' + account.replace(/\\s+/g, ''));\n" +
-               "      }\n" +
                "      while (!document.querySelector('#dvContainer .toolbar-optItem:nth-child(' + indexId + ') div')) {\n" +
                "        await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
                "      }\n" +
@@ -191,6 +181,14 @@ public class EmailBean {
                "        await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
                "      }\n" +
                "      await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
+               "      let acc = document.getElementById('composeSenderButton_text').innerHTML;" +
+               "      let pattern = /(\\w+@[\\w\\.]+)/; " +
+               "      let account = acc.match(pattern)[1]; " +
+               "      if (isAndroid) {\n" +
+               "        prompt('js4337://4337sdk?arg1=mail163&arg2=account&arg3=' + account.replace(/\\s+/g, ''));\n" +
+               "      } else {\n" +
+               "        window.webkit.messageHandlers.CsCallBack.postMessage('mail163;account;' + account.replace(/\\s+/g, ''));\n" +
+               "      }\n" +
                "      document.querySelector('#composeTo input').value = receiverEmail;\n" +
                "      await new Promise(r => setTimeout(r, Math.floor(Math.random() * 500 + 1000)));\n" +
                "      document.querySelector('#composeSubject input').value = 'Crescent';\n" +
